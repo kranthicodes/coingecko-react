@@ -1,7 +1,7 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { CoinDetailsPage } from "./pages/CoinDetails";
-import { CoinListPage } from "./pages/CoinList";
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { CoinDetailsPage } from './pages/CoinDetails';
+import { CoinListPage } from './pages/CoinList';
 
 export default function Routes() {
   return (
