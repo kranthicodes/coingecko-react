@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Table,
   Thead,
@@ -9,22 +9,18 @@ import {
   chakra,
   Image,
   Flex,
-  Text,
-  Box,
-  Button,
-  Spinner,
-} from '@chakra-ui/react';
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
-import { useSortBy, useTable } from 'react-table';
-import { useHistory } from 'react-router-dom';
-import useStore from '../../../store/store';
+} from "@chakra-ui/react";
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { useSortBy, useTable } from "react-table";
+import { useHistory } from "react-router-dom";
+import useStore from "../../../store/store";
 const arr = [
-  { Header: 'Image', accessor: 'image' },
-  { Header: 'Symbol', accessor: 'symbol' },
-  { Header: 'Name', accessor: 'name' },
-  { Header: 'Current Price', accessor: 'current_price' },
-  { Header: 'High 24H', accessor: 'high_24h' },
-  { Header: 'Low 24H', accessor: 'low_24h' },
+  { Header: "Image", accessor: "image" },
+  { Header: "Symbol", accessor: "symbol" },
+  { Header: "Name", accessor: "name" },
+  { Header: "Current Price", accessor: "current_price" },
+  { Header: "High 24H", accessor: "high_24h" },
+  { Header: "Low 24H", accessor: "low_24h" },
 ];
 
 export default function CoinListTable({ list }) {
@@ -44,29 +40,20 @@ export default function CoinListTable({ list }) {
   const columns = React.useMemo(() => arr, []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
-  if (status == 'loading') {
-    return (
-      <Flex
-        justifyContent={'center'}
-        alignItems="center"
-        width={'100%'}
-        height="100%"
-      >
-        <Spinner color="green" size={'xl'} />
-      </Flex>
-    );
-  }
+
   return (
     <Flex
-      justifyContent={'center'}
+      justifyContent={"center"}
       alignItems="center"
-      padding={'1rem'}
+      padding={"1rem"}
       border="1px solid #ababab"
-      borderRadius={'8px'}
+      borderRadius={"8px"}
       flexDirection="column"
-      gap={'20px'}
+      gap={"20px"}
+      boxShadow="md"
+      backgroundColor="white"
     >
-      <Table {...getTableProps()} color="#fff">
+      <Table {...getTableProps()}>
         <Thead>
           {headerGroups.map((headerGroup) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
@@ -74,9 +61,8 @@ export default function CoinListTable({ list }) {
                 <Th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   isNumeric={column.isNumeric}
-                  color="#fff"
                 >
-                  {column.render('Header')}
+                  {column.render("Header")}
                   <chakra.span pl="4">
                     {column.isSorted ? (
                       column.isSortedDesc ? (
@@ -102,9 +88,13 @@ export default function CoinListTable({ list }) {
                   history.push(`/${row.original.id}`);
                 }}
                 cursor="pointer"
+                _hover={{
+                  backgroundColor: "#0BBEF0",
+                  color: "white",
+                }}
               >
                 {row.cells.map((cell) => {
-                  if (cell.column.Header == 'Image') {
+                  if (cell.column.Header == "Image") {
                     return (
                       <Td
                         {...cell.getCellProps()}
@@ -113,8 +103,8 @@ export default function CoinListTable({ list }) {
                         <Image
                           src={cell.value}
                           alt="img"
-                          height={15}
-                          width={15}
+                          height={25}
+                          width={25}
                         />
                       </Td>
                     );
@@ -124,7 +114,7 @@ export default function CoinListTable({ list }) {
                       {...cell.getCellProps()}
                       isNumeric={cell.column.isNumeric}
                     >
-                      {cell.render('Cell')}
+                      {cell.render("Cell")}
                     </Td>
                   );
                 })}
